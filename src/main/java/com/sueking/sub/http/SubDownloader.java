@@ -38,6 +38,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.ssl.SSLContexts;
 import org.apache.http.ssl.TrustStrategy;
+import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -61,7 +62,6 @@ public class SubDownloader {
 		
 		int index = 1;
 		for (SubInfo subInfo : subInfos) {
-			System.out.println(subInfo);
 			for (FileInfo fileInfo : subInfo.Files) {
 				downloadSubFile(fileName, fileInfo, subLang, index++);
 			}
@@ -81,7 +81,6 @@ public class SubDownloader {
 		HttpResponse response = client.execute(httpGet);
 		response.getEntity().writeTo(new FileOutputStream(subFile));
 		client.close();
-		System.out.println(subFile.getName() + "has been downloaded");
 	}
 
 	private static String buildSubFileName(FileInfo fileInfo, String subLang,
