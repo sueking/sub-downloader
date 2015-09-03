@@ -68,7 +68,7 @@ public class SubDownloader {
 		}
 	}
 
-	private static void downloadSubFile(String filePath, FileInfo fileInfo, String subLang, int index) throws IOException, Exception  {
+	private static void downloadSubFile(String filePath, FileInfo fileInfo, String subLang, int index) throws  Exception  {
 		File file = new File(filePath);
 		String fileName = file.getName();
 		String fileNameNoSuffix = fileName.substring(0, fileName.lastIndexOf('.'));
@@ -98,8 +98,8 @@ public class SubDownloader {
 	}
 
 	private static SubInfo[] getSubInfos(String fileName,
-			CloseableHttpClient httpClient, String subLang) throws Exception,
-			UnsupportedEncodingException, IOException, ClientProtocolException {
+			CloseableHttpClient httpClient, String subLang) throws Exception
+			 {
 		List<NameValuePair> formparams = new ArrayList<NameValuePair>();
 		formparams.add(new BasicNameValuePair("filehash", FileHashCalculator.getHash(fileName)));
 		formparams.add(new BasicNameValuePair("pathinfo", fileName));
@@ -151,10 +151,11 @@ public class SubDownloader {
 		return httpClient;
 	}
 
-//	public static void main(String[] args) throws Exception {
-//		download(args[0], SUB_LANG_CHN);
-//		download(args[0], SUB_LANG_ENG);
-//	}
+	public static void main(String[] args) throws Exception {
+		if (args.length != 1) System.out.println("入参错误，输入一个视频文件");
+		download(args[0], SUB_LANG_CHN);
+		download(args[0], SUB_LANG_ENG);
+	}
 	
 	static class FileInfo{
 		String Ext;
